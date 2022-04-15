@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="../drawings/style.css" />
+<canvas></canvas>
+
+<script>
+  let nb_iter = 0
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") {
+      nb_iter++
+    }
+    if (e.key === "ArrowUp") {
+      nb_iter = Math.max(nb_iter - 1, 0)
+    }
+    redraw()
+  })
+</script>
+
+<script src="../drawings/before.js"></script>
+<script>
+  const ligne_droite = (longeur, N) => {
+    if (N > 0) {
+      ligne_droite(longeur / 3, N - 1)
+      turn(60)
+      ligne_droite(longeur / 3, N - 1)
+      turn(-120)
+      ligne_droite(longeur / 3, N - 1)
+      turn(60)
+      ligne_droite(longeur / 3, N - 1)
+    } else {
+      forward(longeur)
+    }
+  }
+  const snowflake_side = () => {
+    ligne_droite(180, nb_iter)
+  }
+  const draw = () => {
+    set_position([-90, 0])
+    set_orientation(0)
+    snowflake_side()
+    // set_orientation(-120)
+    // snowflake_side()
+  }
+</script>
+<script src="../drawings/after.js"></script>

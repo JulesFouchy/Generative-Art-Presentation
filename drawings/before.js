@@ -7,21 +7,45 @@ const mapX = (a) => {
 const mapY = (a) => {
   return ((a / 100 + 1) / 2) * canvas.height
 }
-
-const line = (pt1, pt2) => {
-  context.moveTo(mapX(pt1[0]), mapY(pt1[1]))
-  context.lineTo(mapX(pt2[0]), mapY(pt2[1]))
-  context.stroke()
+const map = (pos) => {
+  return [mapX(pos[0]), mapY(pos[1])]
 }
 
-const line_forward = (distance, angle) => {}
+const line = (pt1, pt2) => {
+  pt1 = map(pt1)
+  pt2 = map(pt2)
+  context.beginPath()
+  context.moveTo(pt1[0], pt1[1])
+  context.lineTo(pt2[0], pt2[1])
+  context.stroke()
+}
 
 const redraw = () => {
   context.fillStyle = "black"
   context.fillRect(0, 0, window.innerWidth, window.innerHeight)
   context.strokeStyle = "white"
-  context.lineWidth = "0.02"
+  context.lineWidth = "1.02"
   draw()
+}
+
+let turtle_position = [0, 0]
+let turtle_direction = 0
+const set_position = (pt) => {
+  turtle_position = pt
+}
+const set_orientation = (angle_in_degrees) => {
+  turtle_direction = (angle_in_degrees / 180) * Math.PI
+}
+const forward = (distance) => {
+  const next_pos = [
+    turtle_position[0] + distance * Math.cos(turtle_direction),
+    turtle_position[1] + distance * Math.sin(turtle_direction),
+  ]
+  line(turtle_position, next_pos)
+  turtle_position = next_pos
+}
+const turn = (angle_delta_in_degrees) => {
+  turtle_direction -= (angle_delta_in_degrees / 180) * Math.PI
 }
 
 function initialize() {
