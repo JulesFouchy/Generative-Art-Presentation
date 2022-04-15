@@ -20,12 +20,12 @@
     return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2
   }
   const draw = () => {
-    for (let y = -100; y < 100; y += 3) {
+    for (let y = -200; y < 200; y += 5) {
       const coef = easeInOutQuad(t)
-      //   line([-100, +y], [mix(-100, 100 - y, coef), -100])
-      //   line([100, +y], [mix(100, -y + 50, coef), 100])
-      //   line([-100, -2 * y], [mix(-100, -y, coef), +100])
-      line([mix(100, +100 + y, coef), +y], [mix(100, +y, coef), -100])
+      line([-100, +y], [mix(-100, 100 - y, coef), -100])
+      line([100, +y], [mix(100, -y + 50, coef), 100])
+      line([-100, -2 * y], [mix(-100, -y, coef), +100])
+      line([mix(100, +100, coef), +y], [mix(100, +y, coef), -100])
     }
     if (t < 1) {
       t += 0.005
