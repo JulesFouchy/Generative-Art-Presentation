@@ -68,3 +68,5 @@ function resizeCanvas() {
   canvas.style.top = window.innerHeight / 2 - canvas.height / 2 + "px"
   redraw(context)
 }
+
+initialize()
