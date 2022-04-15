@@ -1,6 +1,7 @@
 <script>
   let nb_iter = 0
   let symmetry = false
+  let nb_repetitions = 1
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") {
       nb_iter = Math.min(nb_iter + 1, 5)
@@ -10,6 +11,12 @@
     }
     if (e.key === " ") {
       symmetry = !symmetry
+    }
+    if (e.key === "d") {
+      nb_repetitions = Math.min(nb_repetitions + 1, 9)
+    }
+    if (e.key === "q") {
+      nb_repetitions = Math.max(nb_repetitions - 1, 1)
     }
     redraw()
   })
@@ -29,17 +36,19 @@
       forward(longeur)
     }
   }
-  const snowflake_side = () => {
-    ligne_droite(180, nb_iter)
+  const snowflake_side = (longeur) => {
+    ligne_droite(longeur, nb_iter)
   }
   const draw = () => {
-    set_position([-90, 0])
-    set_orientation(0)
-    snowflake_side()
-    if (symmetry) {
-      set_position([90, 0])
-      set_orientation(180)
-      snowflake_side()
+    for (let i = 0; i < nb_repetitions; ++i) {
+      set_position([-90 + i * 10, 0])
+      set_orientation(0)
+      snowflake_side(180 - i * 20)
+      if (symmetry) {
+        set_position([90 - i * 10, 0])
+        set_orientation(180)
+        snowflake_side(180 - i * 20)
+      }
     }
   }
 </script>
