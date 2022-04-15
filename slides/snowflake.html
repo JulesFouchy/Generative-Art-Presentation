@@ -1,11 +1,15 @@
 <script>
   let nb_iter = 0
+  let symmetry = false
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") {
-      nb_iter++
+      nb_iter = Math.min(nb_iter + 1, 5)
     }
     if (e.key === "ArrowUp") {
       nb_iter = Math.max(nb_iter - 1, 0)
+    }
+    if (e.key === " ") {
+      symmetry = !symmetry
     }
     redraw()
   })
@@ -32,8 +36,11 @@
     set_position([-90, 0])
     set_orientation(0)
     snowflake_side()
-    // set_orientation(-120)
-    // snowflake_side()
+    if (symmetry) {
+      set_position([90, 0])
+      set_orientation(180)
+      snowflake_side()
+    }
   }
 </script>
 
