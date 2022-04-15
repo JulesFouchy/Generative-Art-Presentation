@@ -1,4 +1,10 @@
-const order = ["_intro", "snowflake", "after", "circle"]
+const order = [
+  "_intro",
+  "snowflake",
+  "after",
+  "circle",
+  "tables-de-multiplication",
+]
 
 const predecessor = (url) => {
   const idx = order.indexOf(url)

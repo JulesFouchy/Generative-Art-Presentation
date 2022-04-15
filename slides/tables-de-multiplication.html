@@ -1,0 +1,18 @@
+<script>
+  let t = 0
+  const draw = () => {
+    const base = 399
+    const N = 993
+    for (let i = 0; i < N; ++i) {
+      if (i < t) {
+        line(point_on_circle(i, N), point_on_circle(i * base, N))
+      }
+    }
+    if (t < N) {
+      t += 1
+      setTimeout(redraw, 0)
+    }
+  }
+</script>
+
+<script src="./magic/includes.js"></script>
