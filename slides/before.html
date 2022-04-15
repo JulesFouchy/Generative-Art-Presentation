@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="../drawings/style.css" />
+<script src="./navigation.js"></script>
+<canvas></canvas>
+
+<script>
+  let nb_iter = 0
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") {
+      nb_iter++
+    }
+    if (e.key === "ArrowUp") {
+      nb_iter = Math.max(nb_iter - 1, 0)
+    }
+    redraw()
+  })
+</script>
+
+<script src="../drawings/before.js"></script>
+<script>
+  const draw = () => {}
+</script>
+<script src="../drawings/after.js"></script>
