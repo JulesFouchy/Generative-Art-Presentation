@@ -1,16 +1,26 @@
 @font-face {
   font-family: myFont;
-  src: url(font.woff2);
+  src: url(font3.ttf);
+}
+
+@font-face {
+  font-family: myFont2;
+  src: url(font2.otf);
 }
 
 html,
 body {
-  font-family: myFont;
   color: white;
 }
 
 h1 {
   font-size: 50px;
+  font-family: myFont;
+}
+
+h2 {
+  font-size: 40px;
+  font-family: myFont2;
 }
 
 .centered {
