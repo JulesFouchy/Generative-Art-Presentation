@@ -1,0 +1,58 @@
+<script>
+  let t = 0
+  let show_disks = true
+
+  const animate_lines = (N, increment) => {
+    if (show_disks) {
+      for (let i = 0; i < N; ++i) {
+        disk(point_on_circle(i, N), 15)
+      }
+    }
+    for (let i = 0; i < N; ++i) {
+      for (let j = i + 1; j < N; ++j) {
+        const max = N * i + (j - i - 1) - (i * (i + 1)) / 2
+        if (t > max) {
+          const tt = Math.min(t - max, 1)
+          const start = point_on_circle(i, N)
+          const end = point_on_circle(j, N)
+          line(start, mix_points(start, end, tt))
+        }
+      }
+    }
+    t += increment
+    if (t < (N * (N - 1)) / 2) {
+      setTimeout(redraw, 0)
+    }
+  }
+
+  const actions = [
+    () => animate_lines(12, 0.08),
+    () => animate_lines(13, 0.12),
+    () => animate_lines(20, 0.28),
+  ]
+  let actions_idx = 0
+  document.addEventListener("keydown", (e) => {
+    let triggered = false
+    if (e.key === "ArrowDown") {
+      actions_idx = Math.min(actions_idx + 1, actions.length - 1)
+      triggered = true
+    }
+    if (e.key === "ArrowUp") {
+      actions_idx = Math.max(actions_idx - 1, 0)
+      triggered = true
+    }
+    if (e.key === " ") {
+      show_disks = !show_disks
+    }
+    if (triggered) {
+      t = 0
+      redraw()
+    }
+  })
+
+  const draw = () => {
+    actions[actions_idx]()
+  }
+</script>
+
+<script src="./magic/includes.js"></script>

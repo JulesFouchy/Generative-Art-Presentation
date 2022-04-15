@@ -13,9 +13,6 @@
 
 <script>
   let t = 0
-  const mix = (a, b, f) => {
-    return a * (1 - f) + b * f
-  }
   function easeInOutQuad(x) {
     return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2
   }

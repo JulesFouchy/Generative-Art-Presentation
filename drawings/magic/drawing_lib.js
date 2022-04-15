@@ -11,6 +11,49 @@ const map = (pos) => {
   return [mapX(pos[0]), mapY(pos[1])]
 }
 
+// Draw shapes
+// for (let i = 0; i <= 3; i++) {
+//     for (let j = 0; j <= 2; j++) {
+//       ctx.beginPath();
+//       let x             = 25 + j * 50;                 // x coordinate
+//       let y             = 25 + i * 50;                 // y coordinate
+//       let radius        = 20;                          // Arc radius
+//       let startAngle    = 0;                           // Starting point on circle
+//       let endAngle      = Math.PI + (Math.PI * j) / 2; // End point on circle
+//       let counterclockwise = i % 2 == 1;                  // Draw counterclockwise
+
+//       ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+
+//       if (i > 1) {
+//         ctx.fill();
+//       } else {
+//         ctx.stroke();
+//       }
+//     }
+//   }
+
+const mix = (a, b, f) => {
+  return a * (1 - f) + b * f
+}
+
+const mix_points = (a, b, f) => {
+  return [mix(a[0], b[0], f), mix(a[1], b[1], f)]
+}
+
+const point_on_circle = (idx, total, radius) => {
+  radius = radius || 90
+  const angle = (idx / total) * Math.PI * 2 - Math.PI / 2
+  return [radius * Math.cos(angle), radius * Math.sin(angle)]
+}
+
+const disk = (pos, radius) => {
+  pos = map(pos)
+  context.beginPath()
+  context.arc(pos[0], pos[1], radius, 0, 2 * Math.PI)
+  context.fill()
+  context.closePath()
+}
+
 const line = (pt1, pt2) => {
   pt1 = map(pt1)
   pt2 = map(pt2)
@@ -18,12 +61,14 @@ const line = (pt1, pt2) => {
   context.moveTo(pt1[0], pt1[1])
   context.lineTo(pt2[0], pt2[1])
   context.stroke()
+  context.closePath()
 }
 
 const redraw = () => {
   context.fillStyle = "black"
   context.fillRect(0, 0, window.innerWidth, window.innerHeight)
   context.strokeStyle = "white"
+  context.fillStyle = "rgba(255, 255, 255, 0.5)"
   context.lineWidth = "1.02"
   draw()
 }
